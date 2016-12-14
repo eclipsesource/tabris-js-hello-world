@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="hello-world" version="0.1.0">
+  <name>Hello World</name>
+  <description>
+    Example Tabris.js App
+  </description>
+  <author email="fwaibel@eclipsesource.com">
+    Florian Waibel
+  </author>
+</widget>

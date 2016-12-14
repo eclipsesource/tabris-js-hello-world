@@ -1,0 +1,12 @@
+{
+  "name": "hello-world",
+  "version": "0.1.0",
+  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "start": "http-server -c-1 -d false"
+  },
+  "dependencies": {
+    "tabris": "^1.10.0"
+  }
+}
