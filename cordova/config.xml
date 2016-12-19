@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="hello.world" version="0.1.2">
+<widget
+  id="hello.world"
+  version="0.1.2"
+  android-versionCode="$BUILD_NUMBER"
+  ios-CFBundleVersion="$BUILD_NUMBER">
   <name>Hello World</name>
   <description>
     Example Tabris.js App
@@ -7,4 +11,7 @@
   <author email="fwaibel@eclipsesource.com">
     Florian Waibel
   </author>
+
+  <hook type="before_platform_add" src="scripts/replace-config-env-vars.js" />
+
 </widget>
