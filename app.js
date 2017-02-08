@@ -1,20 +1,10 @@
-var page = new tabris.Page({
-  title: 'Example App',
-  topLevel: true
-});
+// This is your first fully working Tabris.js app. Feel free to alter as you please.
+// Changes are saved automatically and are immediately available on your device.
 
-var button = new tabris.Button({
-  centerX: 0, top: 100,
-  text: 'Native Widgets'
-}).appendTo(page);
-
-var textView = new tabris.TextView({
-  centerX: 0, top: [button, 50],
-  font: '24px'
-}).appendTo(page);
-
-button.on('select', function() {
-  textView.set('text', 'Totally Rock!');
-});
-
-page.open();
+// Create a push button and add it to the content view
+new tabris.Button({
+  left: 16, top: 16,
+  text: 'Button'
+}).on('select', function() {
+  this.text = 'Pressed';
+}).appendTo(tabris.ui.contentView);
