@@ -11,6 +11,7 @@
   <author email="fwaibel@eclipsesource.com">
     Florian Waibel
   </author>
+  <preference name="EnableDeveloperConsole" value="$IS_DEBUG"/>
 
   <hook type="before_platform_add" src="scripts/replace-config-env-vars.js" />
 
