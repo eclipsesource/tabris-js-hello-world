@@ -1,12 +1,21 @@
 {
   "name": "hello-world",
-  "version": "0.1.1",
-  "main": "app.js",
+  "version": "0.3.0",
+  "main": "dist/app.js",
   "private": true,
   "scripts": {
-    "start": "http-server -c-1 -d false"
+    "test": "tslint 'src/**/*.ts'",
+    "build": "tsc -p .",
+    "watch": "tsc -w -p .",
+    "start": "npm-run-all --parallel watch serve",
+    "serve": "tabris serve"
   },
   "dependencies": {
     "tabris": "2.0.0-rc1"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.0.2",
+    "tslint": "^5.4.2",
+    "typescript": "^2.3.4"
   }
 }
