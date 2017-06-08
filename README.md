@@ -25,7 +25,7 @@ Within the container prepare and build `tabris-js-hello-world` app with:
 ...
 BUILD SUCCESSFUL
 
-Total time: 9 mins 9.869 secs
+Total time: 52.348 secs
 Built the following apk(s):
 	/workspace/build/cordova/platforms/android/build/outputs/apk/android-debug.apk
 ```
@@ -34,5 +34,6 @@ If you want to sign your app with the same key (e.g. when using Google Maps) you
 
 ```
 # npm install
-# BUILD_NUMBER=4 tabris build android --debug -- --verbose --device --buildConfig=buildConfig.json
+# BUILD_NUMBER=4 tabris build android --debug -- --keystore="../../signing/debug.keystore" --storePassword=android --alias=androiddebugkey
+# # not supported: BUILD_NUMBER=4 tabris build android --debug -- --verbose --device --buildConfig=/workspace/build-config.json 
 ```
