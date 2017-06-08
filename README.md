@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/eclipsesource/tabris-js-hello-world.svg?branch=master)](https://travis-ci.org/eclipsesource/tabris-js-hello-world)
+
 # Hello World example for Tabris.js
 
 ## Build with Docker
