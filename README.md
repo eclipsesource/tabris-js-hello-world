@@ -30,10 +30,23 @@ Built the following apk(s):
 	/workspace/build/cordova/platforms/android/build/outputs/apk/android-debug.apk
 ```
 
-If you want to sign your app with the same key (e.g. when using Google Maps) you can use a `buildConfig.json`:
+If you want to sign your app with the same key in each build (e.g. when using Google Maps) you can use `--cordova-build-config`. (This parameter has been itroduced to Tabris CLI with version `0.6.0`)
 
+```shell
+$ tabris build android --debug --cordova-build-config=cordovaBuildConfig.json
 ```
-# npm install
-# BUILD_NUMBER=4 tabris build android --debug -- --keystore="../../signing/debug.keystore" --storePassword=android --alias=androiddebugkey
-# # not supported: BUILD_NUMBER=4 tabris build android --debug -- --verbose --device --buildConfig=/workspace/build-config.json 
+
+The following `cordovaBuildConfig.json` contains the signing details for a debug build:
+
+```json
+{
+  "android": {
+    "debug": {
+      "keystore": "../signing/debug.keystore",
+      "storePassword": "android",
+      "alias": "androiddebugkey",
+      "password" : "android"
+    }
+  }
+}
 ```
