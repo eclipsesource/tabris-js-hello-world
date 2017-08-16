@@ -36,13 +36,8 @@ RUN apt-get install -y nodejs
 
 # install Tabris CLI and dependencies
 RUN npm install -g cordova@6.5.0
-RUN npm install -g tabris-cli@0.4.0
+RUN npm install -g tabris-cli@~2.0.4
 RUN npm install typescript -g
-
-ENV TABRIS_VERSION 2.0.0-rc1
-ADD https://tabrisjs.com/downloads/${TABRIS_VERSION}/platforms/tabris-android.zip .
-RUN unzip tabris-android.zip && rm tabris-android.zip
-ENV TABRIS_ANDROID_PLATFORM=/tabris-android
 
 # install Gradle
 ENV GRADLE_VERSION 3.5
