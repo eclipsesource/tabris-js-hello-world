@@ -1,5 +1,5 @@
 #FROM openjdk:8u131-jdk-alpine
-FROM openjdk:8u131-jdk
+FROM openjdk:8u141-jdk
 
 # we need unzip, git, node and npm
 #RUN apk --update add unzip && rm -rf /var/lib/apt/lists/* && rm /var/cache/apk/*
