@@ -12,6 +12,7 @@
     Florian Waibel
   </author>
   <preference name="EnableDeveloperConsole" value="$IS_DEBUG"/>
+  <preference name="LogFileLevel" value="0" />
 
   <hook type="before_platform_add" src="scripts/replace-config-env-vars.js" />
 
