@@ -16,6 +16,8 @@
 
   <hook type="before_platform_add" src="scripts/replace-config-env-vars.js" />
 
+  <icon src="res/planet-72.png" />
+
   <platform name="ios">
     <!-- iOS 7.0+ -->
     <!-- iPad -->
