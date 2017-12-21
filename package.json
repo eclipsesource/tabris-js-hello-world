@@ -1,6 +1,6 @@
 {
   "name": "hello-world",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "main": "dist/app.js",
   "private": true,
   "scripts": {
@@ -11,7 +11,7 @@
     "serve": "tabris serve"
   },
   "dependencies": {
-    "tabris": "2.1.1"
+    "tabris": "nightly"
   },
   "devDependencies": {
     "npm-run-all": "^4.0.2",
