@@ -1,7 +1,7 @@
 platform :ios do
   desc "Build the Tabris.js Hello World App"
   lane :buildDebug do
-    match(type: "development", git_url: "git@github.com:eclipsesource/match-certificates.git")
+    match(keychain_name: "ios-build.keychain", type: "development", git_url: "git@github.com:eclipsesource/match-certificates.git")
     # tabris build...
     sh "cd .. && tabris build ios --device --debug"
   end
