@@ -1,0 +1,10 @@
+{
+  "ios": {
+    "debug": {
+      "developmentTeam": "UW3887MHY3",
+      "provisioningProfile": "a18dc7bc-1dbc-4771-95d1-44cb58a36c01",
+      "codeSignIdentity": "iPhone Developer",
+      "packageType": "development"
+    }
+  }
+}
