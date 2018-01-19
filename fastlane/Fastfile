@@ -1,8 +1,9 @@
 platform :ios do
   desc "Build the Tabris.js Hello World App"
-  lane :buildDebug do
+  lane :match do
     match(keychain_name: "jenkins-build.keychain", type: "development", git_url: "git@github.com:eclipsesource/match-certificates.git")
-    # tabris build...
+  end
+  lane :tabrisBuildDebug do
     sh "cd .. && tabris build ios --device --debug"
   end
   desc "Deploy App to the Appstore"
