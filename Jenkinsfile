@@ -39,6 +39,9 @@ node('mac-tabris-2.3.0') {
         // sh 'echo ${TABRIS_BUILD_KEY}'
         sh 'tabris build ios --debug --device'
     }
+    stage('archive apk') {
+        archive '**/libs/*.akp'
+    }
 }
 
 private boolean isScmConfigured() {
