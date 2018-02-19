@@ -10,7 +10,7 @@ node('ubuntu-tabris-2.3.0') {
         if(isScmConfigured()) {
             checkout scm
         } else {
-            git 'git@github.com:eclipsesource/tabris-js-hello-world.git'
+            git 'https://github.com/eclipsesource/tabris-js-hello-world.git'
         }
     }
     stage('npm') {
@@ -20,7 +20,7 @@ node('ubuntu-tabris-2.3.0') {
         // sh 'echo ${TABRIS_BUILD_KEY}'
         sh 'tabris build android --debug --device'
     }
-    stage('archive ipa') {
+    stage('archive apk') {
         archive '**/*.apk'
     }
 }
