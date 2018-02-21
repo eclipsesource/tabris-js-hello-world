@@ -1,4 +1,4 @@
-node('ubuntu-tabris-2.3.0') {
+node('ubuntu-tabris-2.4.0') {
     stage('info') {
         sh 'npm -version'
         sh 'node -v'
