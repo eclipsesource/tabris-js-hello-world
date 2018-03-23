@@ -105,7 +105,7 @@ pipeline {
         stage('archive') {
             steps {
                 // tar dSYM file while directories cannot be archived
-                sh 'tar -C build/cordova/platforms/ios/build/device/ -cf TabrisAnkaTestApp.app.dSYM.tar TabrisAnkaTestApp.app.dSYM'
+                sh 'tar -C build/cordova/platforms/ios/build/device/ -cf Hello_World.app.dSYM.tar Hello\\ World.app.dSYM'
                 // archive "ipa" and dSYM tar files as artifacts of this job
                 archive '**/*.ipa,**/*.dSYM.tar'
             }
