@@ -10,16 +10,9 @@ node('mac-tabris-2.4.0-yubikey-01') {
         sh 'java -version'
         sh '/usr/libexec/java_home -v 1.8'
         sh '/usr/libexec/java_home -v 9 || true'
-        sh "echo ${env.BRANCH_NAME}"
-        sh 'echo $BRANCH_NAME'
-        sh 'env'
-        sh 'set'
-        sh 'export'
     }
     stage('checkout') {
         checkout scm
-        sh "echo ${env.BRANCH_NAME}"
-        sh 'echo $BRANCH_NAME'
     }
     stage('npm') {
         sh 'npm install'
@@ -45,9 +38,4 @@ node('mac-tabris-2.4.0-yubikey-01') {
     stage('archive ipa') {
         archive '**/*.ipa'
     }
-}
-
-private boolean isScmConfigured() {
-    // if the SCM is not configured, then the branch name is null
-    return env.BRANCH_NAME;
 }
