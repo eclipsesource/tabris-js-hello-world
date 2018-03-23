@@ -10,6 +10,8 @@ node('mac-tabris-2.4.0-yubikey-01') {
         sh 'java -version'
         sh '/usr/libexec/java_home -v 1.8'
         sh '/usr/libexec/java_home -v 9 || true'
+        sh 'echo $env.BRANCH_NAME; echo $BRANCH_NAME;'
+        sh 'env'
     }
     stage('checkout') {
         if(isScmConfigured()) {
