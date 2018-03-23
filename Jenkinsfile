@@ -17,12 +17,9 @@ node('mac-tabris-2.4.0-yubikey-01') {
         sh 'export'
     }
     stage('checkout') {
-//        if(isScmConfigured()) {
-//            checkout scm
-//        } else {
-//            git 'git@github.com:eclipsesource/tabris-js-hello-world.git'
-//        }
         checkout scm
+        sh "echo ${env.BRANCH_NAME}"
+        sh 'echo $BRANCH_NAME'
     }
     stage('npm') {
         sh 'npm install'

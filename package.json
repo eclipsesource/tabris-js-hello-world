@@ -11,7 +11,7 @@
     "serve": "tabris serve"
   },
   "dependencies": {
-    "tabris": "nightly"
+    "tabris": "2.4.0"
   },
   "devDependencies": {
     "npm-run-all": "^4.0.2",
