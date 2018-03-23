@@ -3,7 +3,7 @@
   id="com.eclipsesource.sandbox"
   version="0.2.0"
   android-versionCode="$BUILD_NUMBER"
-  ios-CFBundleVersion="2.1.0.012">
+  ios-CFBundleVersion="2.1.0.013">
   <name>Hello World</name>
   <description>
     Example Tabris.js App
