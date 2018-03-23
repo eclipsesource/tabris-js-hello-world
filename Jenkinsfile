@@ -68,7 +68,7 @@ pipeline {
                     // fetch certificates and private key for signing, configure
                     // acl, add to keychain, fetch provisioning profile and store
                     sh 'fastlane match development \
-                            --app_identifier com.eclipsesource.karol.hello.world \
+                            --app_identifier com.eclipsesource.hello.world \
                             --keychain_name ios-build.keychain \
                             --keychain_password foobar \
                             --readonly'
