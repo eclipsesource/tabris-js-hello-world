@@ -14,7 +14,7 @@
   <preference name="EnableDeveloperConsole" value="$IS_DEBUG"/>
   <preference name="LogFileLevel" value="0" />
 
-  <hook type="before_platform_add" src="scripts/replace-config-env-vars.js" />
+  <hook type="before_platform_add" src="alternate_scripts/replace-config-env-vars.js" />
 
   <icon src="res/planet-72.png" />
 
