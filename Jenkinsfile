@@ -12,12 +12,16 @@ node('mac-tabris-2.4.0-yubikey-01') {
         sh '/usr/libexec/java_home -v 9 || true'
     }
     stage('checkout') {
-//        if(isScmConfigured()) {
-//            checkout scm
-//        } else {
-//            git 'git@github.com:eclipsesource/tabris-js-hello-world.git'
-//        }
-        checkout scm
+        steps {
+            script {
+                def gitCommit = checkout(scm).GIT_COMMIT
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: gitCommit]],
+                    userRemoteConfigs: scm.userRemoteConfigs
+                ])
+            }
+        }
     }
     stage('npm') {
         sh 'npm install'
