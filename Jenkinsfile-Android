@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+
 node('ubuntu-tabris-2.4.0') {
     stage('info') {
         sh 'npm -version'
@@ -9,9 +11,11 @@ node('ubuntu-tabris-2.4.0') {
     stage('checkout') {
         if(isScmConfigured()) {
             def gitCommit = checkout(scm).GIT_COMMIT
+            echo "commit: " + gitCommit
+            echo "branch: " + env.BRANCH_NAME
             checkout([
                 $class: 'GitSCM',
-                branches: [[name: gitCommit]],
+                branches: [[name: env.BRANCH_NAME]],
                 userRemoteConfigs: scm.userRemoteConfigs
             ])
         } else {
