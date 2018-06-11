@@ -8,7 +8,12 @@ node('ubuntu-tabris-2.4.0') {
     }
     stage('checkout') {
         if(isScmConfigured()) {
-            checkout scm
+            def gitCommit = checkout(scm).GIT_COMMIT
+            checkout([
+                $class: 'GitSCM',
+                branches: [[name: gitCommit]],
+                userRemoteConfigs: scm.userRemoteConfigs
+            ])
         } else {
             git 'https://github.com/eclipsesource/tabris-js-hello-world.git'
         }
