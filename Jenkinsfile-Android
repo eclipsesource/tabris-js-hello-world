@@ -9,18 +9,18 @@ node('ubuntu-tabris-2.4.0') {
         sh 'java -version'
     }
     stage('checkout') {
-        if(isScmConfigured()) {
+        // if(isScmConfigured()) {
             def gitCommit = checkout(scm).GIT_COMMIT
             echo "commit: " + gitCommit
             echo "branch: " + env.BRANCH_NAME
             checkout([
                 $class: 'GitSCM',
-                branches: [[name: env.BRANCH_NAME]],
+                branches: [[name: gitCommit]],
                 userRemoteConfigs: scm.userRemoteConfigs
             ])
-        } else {
-            git 'https://github.com/eclipsesource/tabris-js-hello-world.git'
-        }
+        // } else {
+        //     git 'https://github.com/eclipsesource/tabris-js-hello-world.git'
+        // }
     }
     stage('npm') {
         sh 'npm install'
