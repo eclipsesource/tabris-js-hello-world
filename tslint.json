@@ -11,6 +11,14 @@
     "forin": false,
     "interface-name": [false],
     "only-arrow-functions": [true, "allow-declarations", "allow-named-functions"],
-    "prefer-const": false
+    "prefer-const": false,
+    "no-invalid-this": true,
+    "no-unbound-method": true,
+    "typedef": [
+      true,
+      "member-variable-declaration",
+      "parameter",
+      "property-declaration"
+    ]
   }
 }
