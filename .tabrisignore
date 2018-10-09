@@ -1,0 +1,12 @@
+src/
+fastlane/
+tslint.json
+tsconfig.json
+.gitignore
+.vscode/
+README.md
+Dockerfile
+Jenkinsfile
+Jenkinsfile-Android
+package-lock.json
+buildConfig-android.json
