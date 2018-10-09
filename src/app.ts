@@ -1,6 +1,7 @@
 // This is a simple Tabris.js app. Feel free to modify as you please.
 
-import {Button, TextView, ui} from 'tabris';
+import {Button, TextView, app, ui} from 'tabris';
+import * as tabris from 'tabris';
 
 // Create a push button and add it to the content view
 let button = new Button({
@@ -14,5 +15,6 @@ let textView = new TextView({
   font: '24px'
 }).appendTo(ui.contentView);
 
+let tabrisVersion = (tabris as any).version;
 // Change the text when the button is pressed
-button.on({select: () => textView.text = 'Tabris.js rocks!'});
+button.on({select: () => textView.text = `Tabris.js ${tabrisVersion} rocks!`});
