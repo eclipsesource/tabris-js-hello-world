@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget
   id="com.eclipsesource.hello.world"
-  version="0.6.0"
+  version="0.6.2"
   android-versionCode="$BUILD_NUMBER"
   ios-CFBundleVersion="$BUILD_NUMBER">
   <name>Hello World</name>
