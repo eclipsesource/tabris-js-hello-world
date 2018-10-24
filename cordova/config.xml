@@ -15,6 +15,8 @@
   <hook type="before_platform_add" src="scripts/replace-config-env-vars.js" />
 
   <platform name="ios">
+    <!-- App Store -->
+    <icon src="res/ios/planet-1024.png" width="1024" height="1024" />
     <!-- iOS 7.0+ -->
     <!-- iPad -->
     <icon src="res/ios/planet-76.png" width="76" height="76" />
