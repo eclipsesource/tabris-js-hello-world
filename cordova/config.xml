@@ -13,6 +13,10 @@
   </author>
 
   <hook type="before_platform_add" src="scripts/replace-config-env-vars.js" />
+  
+  <edit-config file="*-Info.plist" target="NSPhotoLibraryUsageDescription" mode="overwrite">
+    <string>App uses photo library to provide an example usage of it.</string>
+  </edit-config>
 
   <platform name="ios">
     <!-- App Store -->
