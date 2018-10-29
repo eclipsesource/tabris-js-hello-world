@@ -1,50 +1,40 @@
-#FROM openjdk:8u131-jdk-alpine
 FROM openjdk:8u141-jdk
 
-# we need unzip, git, node and npm
-#RUN apk --update add unzip && rm -rf /var/lib/apt/lists/* && rm /var/cache/apk/*
-#RUN apk --update add git && rm -rf /var/lib/apt/lists/* && rm /var/cache/apk/*
-#RUN apk --update add nodejs nodejs-npm && rm -rf /var/lib/apt/lists/* && rm /var/cache/apk/*
-
-RUN apt-get update
-RUN apt-get install unzip
-RUN apt-get install git
+RUN apt-get -qq update \
+   && apt-get -qq -y install \
+   unzip \
+   git
 
 # install the Android SDK
-ENV ANDROID_HOME /var/android_home
-ADD https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip .
-RUN unzip sdk-tools-linux-3859397.zip -d ${ANDROID_HOME} && rm sdk-tools-linux-3859397.zip
-RUN mkdir -p "${ANDROID_HOME}/licenses"
-RUN echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "${ANDROID_HOME}/licenses/android-sdk-license"
-RUN echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "${ANDROID_HOME}/licenses/android-sdk-preview-license"
+ENV ANDROID_HOME /usr/local/share/android-sdk
+ENV SDK_TOOLS_ARCHIVE sdk-tools-linux-4333796.zip
+RUN curl -L https://dl.google.com/android/repository/${SDK_TOOLS_ARCHIVE} -o ${SDK_TOOLS_ARCHIVE} \
+  && unzip ${SDK_TOOLS_ARCHIVE} -d ${ANDROID_HOME} \
+  && rm ${SDK_TOOLS_ARCHIVE} \
+  && yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
 
 # https://developer.android.com/studio/command-line/sdkmanager.html
-#    - platform-tools
-RUN ${ANDROID_HOME}/tools/bin/sdkmanager "platform-tools"
-#    - android-25
-RUN ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-25"
-#    - build-tools-25.0.2
-RUN ${ANDROID_HOME}/tools/bin/sdkmanager "build-tools;25.0.2"
-#    - extra-android-m2repository
-RUN ${ANDROID_HOME}/tools/bin/sdkmanager "extras;android;m2repository"
-#    - extra-google-m2repository
-RUN ${ANDROID_HOME}/tools/bin/sdkmanager "extras;google;m2repository"
+# the following lines correspond to the section "android.components" in the .travis.yml
+RUN ${ANDROID_HOME}/tools/bin/sdkmanager --install "platform-tools"
+RUN ${ANDROID_HOME}/tools/bin/sdkmanager --install "build-tools;28.0.3"
+RUN ${ANDROID_HOME}/tools/bin/sdkmanager --install "platforms;android-27"
 
 # https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
-RUN apt-get install -y nodejs
-
-# install Tabris CLI and dependencies
-RUN npm install -g cordova@6.5.0
-RUN npm install -g tabris-cli@~2.0.4
-RUN npm install typescript -g
+RUN curl -L https://deb.nodesource.com/setup_8.x | bash - && apt-get -qq -y install nodejs
 
 # install Gradle
-ENV GRADLE_VERSION 3.5
-ENV GRADLE_HOME /var/gradle-${GRADLE_VERSION}
-ADD https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip .
-RUN unzip gradle-${GRADLE_VERSION}-bin.zip -d /var && rm gradle-${GRADLE_VERSION}-bin.zip
-RUN ln -s /var/gradle-${GRADLE_VERSION}/bin/gradle /usr/bin/
+ENV GRADLE_VERSION 4.1
+ENV GRADLE_HOME /usr/local/share/gradle-${GRADLE_VERSION}
+RUN curl -L https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -o gradle-${GRADLE_VERSION}-bin.zip \
+  && unzip gradle-${GRADLE_VERSION}-bin.zip -d /usr/local/share \
+  && rm gradle-${GRADLE_VERSION}-bin.zip \
+  && ln -s /usr/local/share/gradle-${GRADLE_VERSION}/bin/gradle /usr/local/bin/
+
+# install Tabris CLI and dependencies
+RUN npm install -g tabris-cli@3.0.0-beta1
+
+# opt-out of Cordova usage statistics
+ENV CI true
 
 WORKDIR /workspace
 VOLUME ["/workspace"]
