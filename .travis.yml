@@ -27,4 +27,6 @@ before_install:
 install:
   - npm install
 
-script: tabris build android
+script:
+  - gradle -v
+  - tabris build android
