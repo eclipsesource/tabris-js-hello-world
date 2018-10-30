@@ -1,27 +1,46 @@
-node('ubuntu-tabris-2.4.0') {
-    stage('info') {
-        sh 'npm -version'
-        sh 'node -v'
-        sh 'tabris --version'
-        sh 'uname -a'
-        sh 'java -version'
-    }
+node {
+
     stage('checkout') {
-        if(isScmConfigured()) {
+        if (isScmConfigured()) {
             checkout scm
         } else {
-            git 'https://github.com/eclipsesource/tabris-js-hello-world.git'
+            checkout([
+                $class: 'GitSCM',
+                branches: [[name: "experimental"]],
+                userRemoteConfigs: [[
+                    url: 'https://github.com/eclipsesource/tabris-js-hello-world.git'
+                ]]
+            ])
         }
     }
-    stage('npm') {
-        sh 'npm install'
+
+    def androidBuildImage
+
+    stage('docker image') {
+        androidBuildImage = docker.build("tabris-js-build-android")
     }
-    stage('tabris build') {
-        // sh 'echo ${TABRIS_BUILD_KEY}'
-        sh 'tabris build android --debug --device'
-    }
-    stage('archive apk') {
-        archive '**/*.apk'
+
+    androidBuildImage.inside {
+        stage('info') {
+            sh 'gradle -v'
+            sh 'node -v'
+            sh 'npm -v'
+            sh 'tabris -V'
+            sh 'pwd'
+            sh 'ls -la'
+        }
+
+        stage('npm') {
+            sh 'npm install'
+        }
+
+        stage('tabris build') {
+            sh 'tabris build android'
+        }
+
+        stage('archive apk') {
+            archive '**/*.apk'
+        }
     }
 }
 
