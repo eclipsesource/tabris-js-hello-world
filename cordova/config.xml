@@ -15,6 +15,9 @@
   <edit-config file="*-Info.plist" target="NSPhotoLibraryUsageDescription" mode="overwrite">
     <string>App uses photo library to provide an example usage of it.</string>
   </edit-config>
+  <edit-config file="*-Info.plist" target="ITSAppUsesNonExemptEncryption" mode="overwrite">
+    <false/>
+  </edit-config>
 
   <platform name="ios">
     <!-- App Store -->
