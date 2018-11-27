@@ -1,4 +1,4 @@
-node('mac-tabris-2.4.0-yubikey-01') {
+node('mac-tabris-2.5.1-yubikey-01') {
     stage('info') {
         sh 'npm -version'
         sh 'node -v'
