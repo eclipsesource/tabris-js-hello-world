@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget
   id="com.eclipsesource.hello.world"
-  version="0.5.0"
+  version="0.5.1"
   android-versionCode="$BUILD_NUMBER"
   ios-CFBundleVersion="$BUILD_NUMBER">
   <name>Hello World</name>
   <description>
     Example Tabris.js App
   </description>
-  <author email="fwaibel@eclipsesource.com">
-    Florian Waibel
+  <author email="jeick@eclipsesource.com">
+    Johannes Eickhold
   </author>
   <preference name="EnableDeveloperConsole" value="$IS_DEBUG"/>
   <preference name="LogFileLevel" value="0" />
