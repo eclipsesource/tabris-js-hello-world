@@ -12,11 +12,7 @@ node('macos && tabris2.7 && xcode10') {
         sh '/usr/libexec/java_home -v 9 || true'
     }
     stage('checkout') {
-        if(isScmConfigured()) {
-            checkout scm
-        } else {
-            git 'https://github.com/eclipsesource/tabris-js-hello-world.git'
-        }
+        checkout scm
     }
     stage('npm') {
         sh 'npm install'
@@ -42,9 +38,4 @@ node('macos && tabris2.7 && xcode10') {
     stage('archive ipa') {
         archiveArtifacts '**/*.ipa'
     }
-}
-
-private boolean isScmConfigured() {
-    // if the SCM is not configured, then the branch name is null
-    return env.BRANCH_NAME;
 }
