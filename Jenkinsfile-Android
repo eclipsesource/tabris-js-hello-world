@@ -1,4 +1,4 @@
-node('ubuntu-tabris-2.4.0') {
+node(label 'android' && 'tabris2.7.0') {
     stage('info') {
         sh 'npm -version'
         sh 'node -v'
@@ -21,7 +21,7 @@ node('ubuntu-tabris-2.4.0') {
         sh 'tabris build android --debug --device'
     }
     stage('archive apk') {
-        archive '**/*.apk'
+        archiveArtifacts '**/*.apk'
     }
 }
 
