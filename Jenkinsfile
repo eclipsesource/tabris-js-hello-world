@@ -15,7 +15,7 @@ node('macos && tabris2.7 && xcode10') {
         if(isScmConfigured()) {
             checkout scm
         } else {
-            git 'git@github.com:eclipsesource/tabris-js-hello-world.git'
+            git 'https://github.com/eclipsesource/tabris-js-hello-world.git'
         }
     }
     stage('npm') {
