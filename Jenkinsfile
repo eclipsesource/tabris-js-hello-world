@@ -1,4 +1,4 @@
-node('mac-tabris-2.4.0-yubikey-01') {
+node('macos && tabris2.7 && xcode10') {
     stage('info') {
         sh 'npm -version'
         sh 'node -v'
@@ -12,12 +12,11 @@ node('mac-tabris-2.4.0-yubikey-01') {
         sh '/usr/libexec/java_home -v 9 || true'
     }
     stage('checkout') {
-//        if(isScmConfigured()) {
-//            checkout scm
-//        } else {
-//            git 'git@github.com:eclipsesource/tabris-js-hello-world.git'
-//        }
-        checkout scm
+        if(isScmConfigured()) {
+            checkout scm
+        } else {
+            git 'git@github.com:eclipsesource/tabris-js-hello-world.git'
+        }
     }
     stage('npm') {
         sh 'npm install'
@@ -41,6 +40,11 @@ node('mac-tabris-2.4.0-yubikey-01') {
         sh 'tabris build ios --debug --device'
     }
     stage('archive ipa') {
-        archive '**/*.ipa'
+        archiveArtifacts '**/*.ipa'
     }
+}
+
+private boolean isScmConfigured() {
+    // if the SCM is not configured, then the branch name is null
+    return env.BRANCH_NAME;
 }
