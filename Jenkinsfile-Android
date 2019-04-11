@@ -1,4 +1,4 @@
-node(label 'android' && 'tabris2.7.0') {
+node('android && tabris2.7.0') {
     stage('info') {
         sh 'npm -version'
         sh 'node -v'
