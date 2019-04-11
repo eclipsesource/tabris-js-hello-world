@@ -20,7 +20,7 @@ node('macos && tabris2.7 && xcode10') {
     stage('fastlane') {
         withCredentials([
             string(credentialsId: 'FASTLANE_PASSWD', variable: 'FASTLANE_PASSWORD'),
-            string(credentialsId: 'INNOOPRACT_MATCH_PASSWD', variable: 'MATCH_PASSWORD'),
+            string(credentialsId: 'GITHUB_MATCH_PASSWD', variable: 'MATCH_PASSWORD'),
             string(credentialsId: 'ANKA_VM_PASSWD', variable: 'ANKA_VM_PASSWORD')
         ]) {
             sh 'echo ${FASTLANE_PASSWORD}'
