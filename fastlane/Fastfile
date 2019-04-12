@@ -1,7 +1,7 @@
 platform :ios do
   desc "Build the Tabris.js Hello World App"
   lane :accessMatchRepo do
-    match(type: "development", git_url: "git@github.com:eclipsesource/match-certificates.git")
+    match(type: "development", git_url: "git@github.com:eclipsesource/match-certificates.git", readonly: true)
   end
   lane :tabrisBuildDebug do
     sh "cd .. && tabris build ios --device --debug"
