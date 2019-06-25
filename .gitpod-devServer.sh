@@ -9,6 +9,6 @@ export PATH=$PATH:$(pwd)/node_modules/.bin
 qrcode ${URL}
 echo Public URL of dev server is: ${URL}
 
-$(sleep 5 && gp preview $(gp url 8080)package.json)
+$(sleep 5 && gp preview $(gp url 8080)/package.json)
 
 tabris serve -l
