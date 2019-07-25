@@ -1,4 +1,4 @@
-node('mac-tabris-2.4.0-yubikey-01') {
+node('xcode10') {
     stage('info') {
         sh 'npm -version'
         sh 'node -v'
