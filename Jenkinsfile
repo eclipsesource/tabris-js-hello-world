@@ -8,7 +8,7 @@ node('xcode10') {
         sh 'uname -a'
         sh 'ruby --version'
         sh 'java -version'
-        sh '/usr/libexec/java_home -v 1.8'
+        sh '/usr/libexec/java_home -v 1.8 || true'
         sh '/usr/libexec/java_home -v 9 || true'
     }
     stage('checkout') {
