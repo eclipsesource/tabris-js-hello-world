@@ -25,7 +25,7 @@ node('xcode10') {
     stage('fastlane') {
         withCredentials([
             string(credentialsId: 'FASTLANE_PASSWD', variable: 'FASTLANE_PASSWORD'),
-            string(credentialsId: 'MATCH_PASSWD', variable: 'MATCH_PASSWORD'),
+            string(credentialsId: 'GITHUB_ECLIPSESOURCE_MATCH_CERTIFICATES_MATCH_PASS', variable: 'MATCH_PASSWORD'),
             string(credentialsId: 'ANKA_VM_PASSWD', variable: 'ANKA_VM_PASSWORD')
         ]) {
             sh 'echo ${FASTLANE_PASSWORD}'
