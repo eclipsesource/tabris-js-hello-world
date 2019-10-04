@@ -6,7 +6,7 @@ node {
         } else {
             checkout([
                 $class: 'GitSCM',
-                branches: [[name: "3.0.0-beta1"]],
+                branches: [[name: "3.2.0"]],
                 userRemoteConfigs: [[
                     url: 'https://github.com/eclipsesource/tabris-js-hello-world.git'
                 ]]

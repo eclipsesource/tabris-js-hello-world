@@ -1,4 +1,4 @@
-FROM openjdk:8u141-jdk
+FROM openjdk:8u222-jdk
 
 RUN apt-get -qq update \
    && apt-get -qq -y install \
@@ -31,7 +31,7 @@ RUN curl -L https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-b
   && ln -s /usr/local/share/gradle-${GRADLE_VERSION}/bin/gradle /usr/local/bin/
 
 # install Tabris CLI and dependencies
-RUN npm install -g tabris-cli@3.0.0-beta1
+RUN npm install -g tabris-cli@3.2.0
 
 # opt-out of Cordova usage statistics
 ENV CI true
