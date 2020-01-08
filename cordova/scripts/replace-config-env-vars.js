@@ -1,6 +1,6 @@
 module.exports = function(context) {
 
-  const fs = context.requireCordovaModule('fs');
+  const fs = require('fs');
   const cordova_util = context.requireCordovaModule('cordova-lib/src/cordova/util');
 
   let projectRoot = cordova_util.isCordova();
