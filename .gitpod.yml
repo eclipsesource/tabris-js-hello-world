@@ -1,0 +1,4 @@
+tasks:
+ - command: "npm i -g tabris-cli qrcode && npm i && ./.gitpod-devServer.sh"
+ports:
+ - port: 8080
