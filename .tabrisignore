@@ -1,12 +1,13 @@
 src/
 fastlane/
-tslint.json
+.eslintrc
 tsconfig.json
 .gitignore
 .vscode/
+node_modules/**/*.d.ts
+node_modules/tabris/ClientMock.js
 README.md
 Dockerfile
 Jenkinsfile
 Jenkinsfile-Android
-package-lock.json
 buildConfig-android.json

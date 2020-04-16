@@ -1,19 +1,21 @@
 {
-  "name": "hello-world",
-  "main": "dist/app.js",
+  "main": "dist",
   "private": true,
   "scripts": {
-    "test": "tslint 'src/**/*.ts'",
+    "test": "npm run build && npm run lint",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "build": "tsc -p .",
-    "watch": "tsc -w -p .",
-    "start": "npm-run-all --parallel watch serve",
-    "serve": "tabris serve"
+    "watch": "tsc -p . -w --preserveWatchOutput --inlineSourceMap",
+    "start": "tabris serve -a -w"
   },
   "dependencies": {
-    "tabris": "3.4.0"
+    "tabris": "~3.4.0"
   },
   "devDependencies": {
-    "tslint": "^5.20.0",
-    "typescript": "3.3.x"
+    "@typescript-eslint/eslint-plugin": "^2.28.0",
+    "@typescript-eslint/parser": "^2.28.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.19.0",
+    "typescript": "~3.3.4000"
   }
 }
