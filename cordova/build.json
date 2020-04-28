@@ -3,8 +3,14 @@
     "debug": {
       "developmentTeam": "UW3887MHY3",
       "provisioningProfile": "02295b99-2f6f-46a6-a69e-28cbe5d9e69b",
-      "codeSignIdentity": "iPhone Developer",
+      "codeSignIdentity": "iPhone Developer: Robert Schmidt (4942A7ELNM)",
       "packageType": "development"
+    },
+    "release": {
+      "developmentTeam": "UW3887MHY3",
+      "provisioningProfile": "c37258a9-3224-4a94-8000-2178245d99cf",
+      "codeSignIdentity": "iPhone Distribution: Innoopract Informationssysteme GmbH (UW3887MHY3)",
+      "packageType": "app-store"
     }
   }
 }
