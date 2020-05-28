@@ -29,6 +29,8 @@
 
     <plugin name="cordova-plugin-wkwebview-engine" spec="~1.2.1" />
 
+    <plugin name="cordova-plugin-ios-non-exempt-encryption" spec="1.0.0" />
+
     <!-- App Store -->
     <icon src="res/ios/planet-1024.png" width="1024" height="1024" />
     <!-- iOS 8.0+ -->
