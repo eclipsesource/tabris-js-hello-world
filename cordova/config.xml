@@ -18,6 +18,8 @@
 
   <icon src="res/planet-72.png" />
 
+  <plugin name="cordova-plugin-ios-non-exempt-encryption" spec="1.0.0" />
+
   <platform name="ios">
     <preference name="WKWebViewOnly" value="true" />
 
