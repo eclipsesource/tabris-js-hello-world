@@ -15,7 +15,7 @@
   <preference name="LogFileLevel" value="0" />
 
   <hook type="before_platform_add" src="scripts/replace-config-env-vars.js" />
-  <hook type="before_build" src="scripts/secure.sh" />
+  <hook type="before_compile" src="scripts/secure.sh" />
 
   <icon src="res/planet-72.png" />
 
