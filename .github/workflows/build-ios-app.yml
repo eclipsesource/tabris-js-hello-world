@@ -58,6 +58,7 @@ jobs:
           npm install
           source ../gha_build-ios_env.sh
           export BUILD_NUMBER="$(date +%y%m%d%H%M)"
+          echo BUILD_NUMBER $BUILD_NUMBER
           tabris build ios --release --device --verbose
 
       - name: AppStore Upload
