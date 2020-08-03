@@ -1,4 +1,4 @@
-import {Button, TextView, contentView, Constraint} from 'tabris';
+import {Button, TextView, contentView, Constraint, tabris} from 'tabris';
 
 export class App {
 
@@ -12,7 +12,7 @@ export class App {
   }
 
   private showText = () => {
-    $(TextView).only().text = 'Tabris.js rocks!';
+    $(TextView).only().text = 'Tabris.js ' + tabris.version + ' rocks!';
   };
 
 }
