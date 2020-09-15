@@ -12,6 +12,9 @@ jobs:
   build-ios:
     runs-on: macos-latest
     name: Build Tabris.js Hello World iOS
+    strategy:
+      matrix:
+        build_type: [release, development]
     steps:
 
       - name: Checkout
@@ -46,7 +49,11 @@ jobs:
           chmod 0600 gha_eclipsesource_match-certificates
           ssh-add gha_eclipsesource_match-certificates
 
-          fastlane match appstore --readonly --app_identifier com.eclipsesource.hello.world
+          if [[ "${{ matrix.build_type }}" -eq "release" ]]; then
+            fastlane match appstore --readonly --app_identifier com.eclipsesource.hello.world
+          else
+            fastlane match development --readonly --app_identifier com.eclipsesource.*
+          fi
 
           ssh-add -D
           rm gha_eclipsesource_match-certificates
@@ -63,9 +70,15 @@ jobs:
           source ../gha_build-ios_env.sh
           export BUILD_NUMBER="$(date +%y%m%d%H%M).2"
           echo BUILD_NUMBER $BUILD_NUMBER
-          tabris build ios --release --device --verbose
+
+          if [[ "${{ matrix.build_type }}" -eq "release" ]]; then
+            tabris build ios --release --device --verbose
+          else
+            tabris build ios --debug --device --verbose
+          fi
 
       - name: AppStore Upload
+        if: ${{ matrix.build_type == 'release' }}
         run: |
           source gha_build-ios_env.sh
           xcrun altool --upload-app --type ios \
