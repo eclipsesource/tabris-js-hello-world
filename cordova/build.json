@@ -3,7 +3,7 @@
     "debug": {
       "developmentTeam": "UW3887MHY3",
       "provisioningProfile": "312ee969-9aad-4b08-9727-618066bc4ec0",
-      "codeSignIdentity": "Apple Developer: Robert Schmidt (4942A7ELNM)",
+      "codeSignIdentity": "Apple Development: Robert Schmidt (4942A7ELNM)",
       "packageType": "development"
     },
     "release": {
