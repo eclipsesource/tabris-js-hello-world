@@ -14,7 +14,7 @@ jobs:
     name: Build Tabris.js Hello World iOS
     strategy:
       matrix:
-        build_type: [release, development]
+        build_type: [release, debug]
     steps:
 
       - name: Checkout
@@ -49,7 +49,7 @@ jobs:
           chmod 0600 gha_eclipsesource_match-certificates
           ssh-add gha_eclipsesource_match-certificates
 
-          if [[ "${{ matrix.build_type }}" -eq "release" ]]; then
+          if [[ "${{ matrix.build_type }}" == "release" ]]; then
             fastlane match appstore --readonly --app_identifier com.eclipsesource.hello.world
           else
             fastlane match development --readonly --app_identifier com.eclipsesource.*
@@ -71,11 +71,7 @@ jobs:
           export BUILD_NUMBER="$(date +%y%m%d%H%M).3"
           echo BUILD_NUMBER $BUILD_NUMBER
 
-          if [[ "${{ matrix.build_type }}" -eq "release" ]]; then
-            tabris build ios --release --device --verbose
-          else
-            tabris build ios --debug --device --verbose
-          fi
+          tabris build ios --${{ matrix.build_type }} --device --verbose
 
       - name: AppStore Upload
         if: ${{ matrix.build_type == 'release' }}
