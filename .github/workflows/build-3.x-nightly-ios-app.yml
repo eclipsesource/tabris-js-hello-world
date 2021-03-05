@@ -12,6 +12,7 @@ jobs:
   build-ios:
     runs-on: macos-latest
     name: Build Tabris.js Hello World iOS
+    environment: 'iOS app build'
     strategy:
       matrix:
         build_type: [release, debug]
@@ -24,50 +25,47 @@ jobs:
           path: tabris-js-hello-world
           fetch-depth: 1
 
-      - name: Decrypt secrets
-        env:
-          OPENSSL_PASSPHRASE: ${{ secrets.ENCRYPTION_KEY }}
-        run: |
-          openssl aes-256-cbc -in tabris-js-hello-world/.github/workflows/ios/gha_eclipsesource_match-certificates.enc -out gha_eclipsesource_match-certificates -pass pass:$OPENSSL_PASSPHRASE -d -md md5
-          openssl aes-256-cbc -in tabris-js-hello-world/.github/workflows/ios/gha_build-ios_env.sh.enc                 -out gha_build-ios_env.sh                 -pass pass:$OPENSSL_PASSPHRASE -d -md md5
+      - name: Checkout match-certificates
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ secrets.TABRIS_IOS_MATCH_GIT_URL }}
+          ref: ${{ secrets.TABRIS_IOS_MATCH_GIT_BRANCH }}
+          ssh-key: ${{ secrets.TABRIS_IOS_MATCH_GIT_SSH_KEY }}
+          path: match
+          fetch-depth: 1
 
       - name: Prepare keychain
         env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          DEBUG_APP_IDENTIFIER: 'com.eclipsesource.*'
+          RELEASE_APP_IDENTIFIER: 'com.eclipsesource.hello.world'
+          FASTLANE_TEAM_ID: ${{ secrets.TABRIS_IOS_FASTLANE_TEAM_ID }}
+          FASTLANE_USER: ${{ secrets.TABRIS_IOS_FASTLANE_USER }}
+          MATCH_PASSWORD: ${{ secrets.TABRIS_IOS_MATCH_PASSWORD }}
+          MATCH_GIT_URL: ./match
+          MATCH_GIT_BRANCH: ${{ secrets.TABRIS_IOS_MATCH_GIT_BRANCH }}
+          MATCH_KEYCHAIN_NAME: 'build.keychain'
+          MATCH_KEYCHAIN_PASSWORD: 'foobar'
         run: |
-          source gha_build-ios_env.sh
-
           security create-keychain -p $MATCH_KEYCHAIN_PASSWORD $MATCH_KEYCHAIN_NAME
           security unlock-keychain -p $MATCH_KEYCHAIN_PASSWORD $MATCH_KEYCHAIN_NAME
           security set-keychain-settings -u -t 3600 $MATCH_KEYCHAIN_NAME
           security list-keychains -d user -s $MATCH_KEYCHAIN_NAME
 
-          mkdir -p ~/.ssh
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          chmod 0600 gha_eclipsesource_match-certificates
-          ssh-add gha_eclipsesource_match-certificates
-
           if [[ "${{ matrix.build_type }}" == "release" ]]; then
-            fastlane match appstore --readonly --app_identifier com.eclipsesource.hello.world
+            fastlane match appstore --readonly --app_identifier ${{ env.RELEASE_APP_IDENTIFIER }}
           else
-            fastlane match development --readonly --app_identifier com.eclipsesource.*
+            fastlane match development --readonly --app_identifier ${{ env.DEBUG_APP_IDENTIFIER }}
           fi
-
-          ssh-add -D
-          rm gha_eclipsesource_match-certificates
 
       - name: Install tabris-cli
         run: npm install -g tabris-cli
 
       - name: Build tabris-js-hello-world
         env:
-          TABRIS_BUILD_KEY: ${{ secrets.TABRIS_BUILD_KEY }}
+          TABRIS_BUILD_KEY: ${{ secrets.TABRIS_IOS_BUILD_KEY }}
         run: |
           cd tabris-js-hello-world
           npm install
-          source ../gha_build-ios_env.sh
           export BUILD_NUMBER="$(date +%y%m%d%H%M).3"
           echo BUILD_NUMBER $BUILD_NUMBER
 
@@ -75,13 +73,14 @@ jobs:
 
       - name: AppStore Upload
         if: ${{ matrix.build_type == 'release' }}
+        env:
+          FASTLANE_USER: ${{ secrets.TABRIS_IOS_FASTLANE_USER }}
+          FASTLANE_APP_SPECIFIC_PASSWORD: ${{ secrets.TABRIS_IOS_FASTLANE_APP_SPECIFIC_PASSWORD }}
         run: |
-          source gha_build-ios_env.sh
           xcrun altool --upload-app --type ios \
-            --file tabris-js-hello-world/build/cordova/platforms/ios/build/device/*.ipa \
+            --file "$(find . -iname "*.ipa")" \
             --username $FASTLANE_USER \
-            --password '@env:FASTLANE_PASSWORD'
-          rm gha_build-ios_env.sh
+            --password '@env:FASTLANE_APP_SPECIFIC_PASSWORD'
 
       - name: Cleanup
         if: always()
