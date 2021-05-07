@@ -16,7 +16,13 @@ jobs:
     strategy:
       matrix:
         build_type: [release, debug]
+        node_version: [10, 11, 12, 13, 14, 15]
     steps:
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node_version }}
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -72,7 +78,7 @@ jobs:
           tabris build ios --${{ matrix.build_type }} --device --verbose
 
       - name: AppStore Upload
-        if: ${{ matrix.build_type == 'release' }}
+        if: ${{ matrix.build_type == 'release' && matrix.node_version == 14 }}
         env:
           FASTLANE_USER: ${{ secrets.TABRIS_IOS_FASTLANE_USER }}
           FASTLANE_APP_SPECIFIC_PASSWORD: ${{ secrets.TABRIS_IOS_FASTLANE_APP_SPECIFIC_PASSWORD }}
