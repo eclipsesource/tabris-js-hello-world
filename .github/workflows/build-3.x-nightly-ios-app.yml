@@ -16,7 +16,13 @@ jobs:
     strategy:
       matrix:
         build_type: [release, debug]
+        node_version: [10, 11, 12, 13, 14, 15]
     steps:
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+          with:
+          node-version: ${{ matrix.node_version }}
 
       - name: Checkout
         uses: actions/checkout@v2
