@@ -18,8 +18,6 @@
 
   <icon src="res/planet-72.png" />
 
-  <plugin name="cordova-plugin-ios-non-exempt-encryption" spec="1.0.0" />
-  
   <platform name="ios">
     <preference name="WKWebViewOnly" value="true" />
 
@@ -28,8 +26,6 @@
     </feature>
 
     <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
-
-    <plugin name="cordova-plugin-wkwebview-engine" spec="~1.2.1" />
 
     <icon src="res/ios/planet-1024.png" width="1024" height="1024"/>
     <icon src="res/ios/planet-small.png" width="29" height="29"/>

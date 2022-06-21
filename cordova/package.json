@@ -1,0 +1,13 @@
+{
+    "name": "tabris-js-hello-world",
+    "devDependencies": {
+      "cordova-plugin-ios-non-exempt-encryption": "1.0.0",
+      "cordova-plugin-wkwebview-engine": "~1.2.1"
+    },
+    "cordova": {
+      "plugins": {
+        "cordova-plugin-ios-non-exempt-encryption": {},
+        "cordova-plugin-wkwebview-engine": {}
+      }
+    }
+  }
