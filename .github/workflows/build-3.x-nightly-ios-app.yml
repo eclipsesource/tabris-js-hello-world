@@ -23,7 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: 3.x-nightly
+          ref: 3.x-nightly-nodejs18
           path: tabris-js-hello-world
           fetch-depth: 1
 
