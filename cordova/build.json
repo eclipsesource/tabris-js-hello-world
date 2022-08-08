@@ -2,13 +2,13 @@
   "ios": {
     "debug": {
       "developmentTeam": "UW3887MHY3",
-      "provisioningProfile": "b668570b-afa2-4ebc-b18e-dd82877b00bc",
+      "provisioningProfile": "6636b967-ba09-44b9-8a2c-0f241c623a22",
       "codeSignIdentity": "Apple Development: Robert Schmidt (4942A7ELNM)",
       "packageType": "development"
     },
     "release": {
       "developmentTeam": "UW3887MHY3",
-      "provisioningProfile": "74eb6eb1-ba16-4d59-accc-5c0c8b75cc99",
+      "provisioningProfile": "3cc5f9ef-5089-4cf3-af34-7f4801c45def",
       "codeSignIdentity": "Apple Distribution: Innoopract Informationssysteme GmbH (UW3887MHY3)",
       "packageType": "app-store"
     }
