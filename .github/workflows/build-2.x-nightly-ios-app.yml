@@ -79,7 +79,6 @@ jobs:
       - name: AppStore Upload
         if: ${{ matrix.build_type == 'release' }}
         env:
-          DEVELOPER_DIR: /Applications/Xcode_12.5.1.app/Contents/Developer
           FASTLANE_USER: ${{ secrets.TABRIS_IOS_FASTLANE_USER }}
           FASTLANE_APP_SPECIFIC_PASSWORD: ${{ secrets.TABRIS_IOS_FASTLANE_APP_SPECIFIC_PASSWORD }}
         run: |
