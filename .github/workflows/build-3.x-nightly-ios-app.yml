@@ -18,49 +18,24 @@ jobs:
         build_type: [release, debug]
     steps:
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
+      - name: Install the Apple certificate and provisioning profile
+        uses: eclipsesource/prepare-for-signing-action@v1
         with:
-          node-version: '14'
+          app_identifier: "${{ matrix.build_type == 'release' && 'com.eclipsesource.hello.world' || 'com.eclipsesource.*' }}"
+          profile_type: "${{ matrix.build_type == 'release' && 'appstore' || 'development' }}"
+          match_git_url: ${{ secrets.TABRIS_IOS_MATCH_GIT_URL }}
+          match_git_branch: ${{ secrets.TABRIS_IOS_MATCH_GIT_BRANCH }}
+          match_git_ssh_key: ${{ secrets.TABRIS_IOS_MATCH_GIT_SSH_KEY }}
+          match_password: ${{ secrets.TABRIS_IOS_MATCH_PASSWORD }}
+          fastlane_team_id: ${{ secrets.TABRIS_IOS_FASTLANE_TEAM_ID }}
+          fastlane_user: ${{ secrets.TABRIS_IOS_FASTLANE_USER }}
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: 3.x-nightly
           path: tabris-js-hello-world
           fetch-depth: 1
-
-      - name: Checkout match-certificates
-        uses: actions/checkout@v2
-        with:
-          repository: ${{ secrets.TABRIS_IOS_MATCH_GIT_URL }}
-          ref: ${{ secrets.TABRIS_IOS_MATCH_GIT_BRANCH }}
-          ssh-key: ${{ secrets.TABRIS_IOS_MATCH_GIT_SSH_KEY }}
-          path: match
-          fetch-depth: 1
-
-      - name: Prepare keychain
-        env:
-          DEBUG_APP_IDENTIFIER: 'com.eclipsesource.*'
-          RELEASE_APP_IDENTIFIER: 'com.eclipsesource.hello.world'
-          FASTLANE_TEAM_ID: ${{ secrets.TABRIS_IOS_FASTLANE_TEAM_ID }}
-          FASTLANE_USER: ${{ secrets.TABRIS_IOS_FASTLANE_USER }}
-          MATCH_PASSWORD: ${{ secrets.TABRIS_IOS_MATCH_PASSWORD }}
-          MATCH_GIT_URL: ./match
-          MATCH_GIT_BRANCH: ${{ secrets.TABRIS_IOS_MATCH_GIT_BRANCH }}
-          MATCH_KEYCHAIN_NAME: 'build.keychain'
-          MATCH_KEYCHAIN_PASSWORD: 'foobar'
-        run: |
-          security create-keychain -p $MATCH_KEYCHAIN_PASSWORD $MATCH_KEYCHAIN_NAME
-          security unlock-keychain -p $MATCH_KEYCHAIN_PASSWORD $MATCH_KEYCHAIN_NAME
-          security set-keychain-settings -u -t 3600 $MATCH_KEYCHAIN_NAME
-          security list-keychains -d user -s $MATCH_KEYCHAIN_NAME
-
-          if [[ "${{ matrix.build_type }}" == "release" ]]; then
-            fastlane match appstore --readonly --app_identifier ${{ env.RELEASE_APP_IDENTIFIER }}
-          else
-            fastlane match development --readonly --app_identifier ${{ env.DEBUG_APP_IDENTIFIER }}
-          fi
 
       - name: Install tabris-cli
         run: npm install -g tabris-cli
@@ -71,6 +46,7 @@ jobs:
         run: |
           cd tabris-js-hello-world
           npm install
+
           export BUILD_NUMBER="$(date +%y%m%d%H%M).3"
           echo BUILD_NUMBER $BUILD_NUMBER
 
