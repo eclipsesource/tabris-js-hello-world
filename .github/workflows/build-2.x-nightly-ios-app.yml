@@ -31,7 +31,7 @@ jobs:
           fastlane_user: ${{ secrets.TABRIS_IOS_FASTLANE_USER }}
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: 2.x-nightly
           path: tabris-js-hello-world
