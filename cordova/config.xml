@@ -21,6 +21,9 @@
   <plugin name="cordova-plugin-ios-non-exempt-encryption" spec="1.0.0" />
 
   <platform name="ios">
+    <resource-file src="res/Settings.bundle" target="Settings.bundle" />
+    <resource-file src="res/Settings.bundle/Root.plist" target="Settings.bundle/Root.plist" />
+
     <preference name="WKWebViewOnly" value="true" />
 
     <feature name="CDVWKWebViewEngine">

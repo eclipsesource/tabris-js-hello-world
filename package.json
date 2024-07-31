@@ -9,6 +9,7 @@
     "start": "tabris serve -a -w"
   },
   "dependencies": {
+    "plist": "^3.1.0",
     "tabris": "latest"
   },
   "devDependencies": {
