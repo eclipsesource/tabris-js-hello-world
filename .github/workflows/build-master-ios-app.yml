@@ -4,9 +4,12 @@ on:
   push:
   schedule:
     - cron:  '15 5 * * *'
-  repository_dispatch:
-    types:
-      - build-master-ios
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Branch or tag to build'
+        required: false
+        default: 'master'
 
 jobs:
   build-ios:
@@ -33,7 +36,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: master
+          ref: ${{ inputs.ref || 'master' }}
           path: tabris-js-hello-world
           fetch-depth: 1
 
