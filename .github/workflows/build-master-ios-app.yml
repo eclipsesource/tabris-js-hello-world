@@ -24,7 +24,7 @@ jobs:
     steps:
 
       - name: Install the Apple certificate and provisioning profile
-        uses: eclipsesource/prepare-for-signing-action@v1
+        uses: eclipsesource/prepare-for-signing-action@v2
         with:
           app_identifier: "${{ matrix.build_type == 'release' && 'com.eclipsesource.hello.world' || 'com.eclipsesource.*' }}"
           profile_type: "${{ matrix.build_type == 'release' && 'appstore' || 'development' }}"
